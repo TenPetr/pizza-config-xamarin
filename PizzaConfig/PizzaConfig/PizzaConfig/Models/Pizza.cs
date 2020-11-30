@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using SQLite;
 
 namespace PizzaConfig
 {
-    class Pizza
+    public class Pizza
     {
+        [PrimaryKey, AutoIncrement]
         public int id { get; set; }
 
         public string name { get; set; }
@@ -21,6 +22,10 @@ namespace PizzaConfig
             this.ingrediences = ingrediences;
             this.price = price;
             this.extras = extras;
+        }
+
+        public Pizza()
+        {
         }
     }
 }

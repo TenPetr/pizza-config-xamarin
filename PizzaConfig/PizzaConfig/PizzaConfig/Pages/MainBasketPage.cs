@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -42,9 +41,12 @@ namespace PizzaConfig
             totalPrice = calculateTotalPrice();
         }
 
-        private void addToFavourite(Pizza pizza)
+        async private void addToFavourite(Pizza pizza)
         {
-            Trace.WriteLine("awdawd");
+            Pizza newPizza = NewPizza.createNewPizza(pizza);
+            await App.databaseService.savePizza(newPizza);
+
+            displayAlert("Your pizza has been saved to the favourites");
         }
 
         private void placeOrder()
@@ -52,7 +54,7 @@ namespace PizzaConfig
             totalPrice = 0;
             MainPizzaPage.selectedPizzas.Clear();
             goToMainPage();
-            displayAlert();
+            displayAlert("Your order has been placed, please wait patiently for delivery!");
         }
 
         async private void goToMainPage()
@@ -60,12 +62,12 @@ namespace PizzaConfig
             await Application.Current.MainPage.Navigation.PopAsync();
         }
 
-        async private void displayAlert()
+        async private void displayAlert(string message)
         {
             await Application
                 .Current
                 .MainPage
-                .DisplayAlert("Info", "Your order has been placed, please wait patiently for delivery!", "OK");
+                .DisplayAlert("Info", message, "OK");
         }
 
         private double calculateTotalPrice()

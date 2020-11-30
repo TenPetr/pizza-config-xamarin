@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PizzaConfig"
+             x:Class="PizzaConfig.FavouritesPage"
+             x:Name="FavouritesPizzas"
+             Title="Favourites Pizzas">
+    <ContentPage.BindingContext>
+        <local:MainFavouritesPage />
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <CollectionView ItemsSource="{Binding favouritesPizzas}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem Text="Add to the basket"
+                                           BackgroundColor="RoyalBlue"
+                                           Command="{Binding Source={x:Reference FavouritesPizzas},
+                                                        Path=BindingContext.addToBasketCommand}"
+                                           CommandParameter="{Binding}"/>
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+                        <SwipeView.RightItems>
+                            <SwipeItems Mode="Execute">
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={x:Reference FavouritesPizzas},
+                                                        Path=BindingContext.removeFavouritePizzaCommand}"
+                                           CommandParameter="{Binding}"/>
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="1"
+                                   FontSize="17"
+                                   Text="{Binding name}"
+                                   FontAttributes="Bold" />
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontSize="15"
+                                   Text="{Binding ingrediences}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            <Label Grid.Row="2"
+                                   Grid.Column="1"
+                                   FontSize="15"
+                                   Text="{Binding extras}"
+                                   FontAttributes="Italic"
+                                   VerticalOptions="End" />
+                            <Label Grid.Column="2"
+                                   FontSize="17"
+                                   Text="{Binding price}"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="End" />
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

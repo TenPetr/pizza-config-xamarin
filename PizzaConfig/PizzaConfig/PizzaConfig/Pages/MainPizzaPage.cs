@@ -20,6 +20,7 @@ namespace PizzaConfig
 
         public List<Pizza> basePizzas { get; set; }
         public static ObservableCollection<Pizza> selectedPizzas { get; set; }
+        public static ObservableCollection<Pizza> favouritesPizzas { get; set; }
 
         public MainPizzaPage()
         {
@@ -32,6 +33,7 @@ namespace PizzaConfig
 
             basePizzas = InitialPizzas.createInitialPizzas();
             selectedPizzas = new ObservableCollection<Pizza>();
+            favouritesPizzas = new ObservableCollection<Pizza>();
         }
 
         private void addExtraBacon(Pizza selectedPizza)
@@ -66,7 +68,7 @@ namespace PizzaConfig
 
         async private void goToFavourites()
         {
-            // await Application.Current.MainPage.Navigation.PushAsync(new BasketPage());
+            await Application.Current.MainPage.Navigation.PushAsync(new FavouritesPage());
         }
     }
 }
