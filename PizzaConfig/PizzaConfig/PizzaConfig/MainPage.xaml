@@ -75,12 +75,13 @@
             <Button Text="Favourite pizzas"
                     BackgroundColor="#4E342E"
                     TextColor="White"
-                    CornerRadius="10" />
+                    CornerRadius="10"
+                    Command="{Binding goToFavouritesCommand}"/>
             <Button Text="Go to checkout"
                     BackgroundColor="#4E342E"
                     TextColor="White"
                     CornerRadius="10"
-                    Command="{Binding goToCheckoutCommand}"/>
+                    Command="{Binding goToCheckoutCommand}"/> 
         </StackLayout>
     </StackLayout>
 </ContentPage>

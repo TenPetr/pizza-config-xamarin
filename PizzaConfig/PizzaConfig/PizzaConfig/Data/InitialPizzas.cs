@@ -12,7 +12,7 @@ namespace PizzaConfig
                 new Pizza(2, "Hawai", "Ananas, Salam, Olive, Tomatoes", 129.99, ""),
                 new Pizza(3, "Peperoni", "Peppers, Salam, Cheese, Tomatoes", 179.59, ""),
                 new Pizza(4, "Cheesee", "5 types of Cheese, Tomatoes", 119.19, ""),
-                new Pizza(4, "Italiano", "Cheese, Salami, Tomatoes, Ketchup", 199.99, "")
+                new Pizza(5, "Italiano", "Cheese, Salami, Tomatoes, Ketchup", 199.99, "")
             };
         }
     }

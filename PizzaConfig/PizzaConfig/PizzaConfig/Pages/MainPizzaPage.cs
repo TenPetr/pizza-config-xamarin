@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 
 namespace PizzaConfig
@@ -15,20 +16,22 @@ namespace PizzaConfig
         public Command addExtraCheeseCommand { get; set; }
         public Command addExtraOlivasCommand { get; set; }
         public Command goToCheckoutCommand { get; set; }
+        public Command goToFavouritesCommand { get; set; }
 
         public List<Pizza> basePizzas { get; set; }
-        public static List<Pizza> selectedPizzas { get; set; }
+        public static ObservableCollection<Pizza> selectedPizzas { get; set; }
 
         public MainPizzaPage()
         {
-            addExtraBaconCommand = new Command<Pizza>((pizza) => addExtraBacon(pizza));
-            addExtraCheeseCommand = new Command<Pizza>((pizza) => addExtraCheese(pizza));
-            addExtraOlivasCommand = new Command<Pizza>((pizza) => addExtraOlivas(pizza));
-            selectPizzaCommand = new Command<Pizza>((pizza) => selectAndResetBasePizza(pizza));
+            addExtraBaconCommand = new Command<Pizza>(pizza => addExtraBacon(pizza));
+            addExtraCheeseCommand = new Command<Pizza>(pizza => addExtraCheese(pizza));
+            addExtraOlivasCommand = new Command<Pizza>(pizza => addExtraOlivas(pizza));
+            selectPizzaCommand = new Command<Pizza>(pizza => selectAndResetBasePizza(pizza));
             goToCheckoutCommand = new Command(goToCheckout);
+            goToFavouritesCommand = new Command(goToFavourites);
 
             basePizzas = InitialPizzas.createInitialPizzas();
-            selectedPizzas = new List<Pizza>();
+            selectedPizzas = new ObservableCollection<Pizza>();
         }
 
         private void addExtraBacon(Pizza selectedPizza)
@@ -59,6 +62,11 @@ namespace PizzaConfig
         async private void goToCheckout()
         {
             await Application.Current.MainPage.Navigation.PushAsync(new BasketPage());
+        }
+
+        async private void goToFavourites()
+        {
+            // await Application.Current.MainPage.Navigation.PushAsync(new BasketPage());
         }
     }
 }

@@ -79,6 +79,7 @@
         </StackLayout>
         <StackLayout Padding="15">
             <Button Text="Place order!"
+                    Command="{Binding placeOrderCommand}"
                     BackgroundColor="#4E342E"
                     TextColor="White"
                     CornerRadius="10" />
