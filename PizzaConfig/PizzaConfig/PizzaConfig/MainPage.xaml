@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PizzaConfig"
+             x:Class="PizzaConfig.MainPage"
+             x:Name="PizzaView"
+             Title="Welcome to the pizza configurator!">
+    <ContentPage.BindingContext>
+        <local:MainPizzaPage />
+    </ContentPage.BindingContext>
+    <StackLayout>
+        <StackLayout Padding="15">
+            <Label Text="Please, select your base pizza" FontSize="18" HorizontalOptions="Center" Margin="0,5,0,5"/>
+            <CarouselView ItemsSource="{Binding basePizzas}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Frame HasShadow="True"
+                                   BorderColor="DarkGray"
+                                   CornerRadius="10"
+                                   Margin="20"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="StartAndExpand">
+                                <StackLayout>
+                                    <Label Text="{Binding name}"
+                                           FontAttributes="Bold"
+                                           FontSize="Large"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding ingrediences}"
+                                           FontSize="18"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                    <Label Text="{Binding price}"
+                                           Margin="0,5,0,5"
+                                           FontSize="18"
+                                           HorizontalOptions="Center" />
+                                    <StackLayout Orientation="Horizontal" Margin="0,5,0,5">
+                                        <Button Text="Bacon"
+                                                BackgroundColor="#8D6E63"
+                                                TextColor="White"
+                                                CornerRadius="10"
+                                                Command="{Binding Source={x:Reference PizzaView},
+                                                            Path=BindingContext.addExtraBaconCommand}"
+                                                CommandParameter="{Binding}"/>
+                                        <Button Text="Cheese"
+                                                BackgroundColor="#8D6E63"
+                                                TextColor="White"
+                                                CornerRadius="10"
+                                                Command="{Binding Source={x:Reference PizzaView},
+                                                            Path=BindingContext.addExtraCheeseCommand}"
+                                                CommandParameter="{Binding}"/>
+                                        <Button Text="Olivas"
+                                                BackgroundColor="#8D6E63"
+                                                TextColor="White"
+                                                CornerRadius="10"
+                                                Command="{Binding Source={x:Reference PizzaView},
+                                                            Path=BindingContext.addExtraOlivasCommand}"
+                                                CommandParameter="{Binding}">
+                                        </Button>
+                                    </StackLayout>
+                                    <Button Text="Select this pizza!"
+                                            BackgroundColor="#4E342E"
+                                            TextColor="White"
+                                            CornerRadius="10"
+                                            Command="{Binding Source={x:Reference PizzaView},
+                                                        Path=BindingContext.selectPizzaCommand}"
+                                            CommandParameter="{Binding}"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <Button Text="Favourite pizzas"
+                    BackgroundColor="#4E342E"
+                    TextColor="White"
+                    CornerRadius="10" />
+            <Button Text="Go to checkout"
+                    BackgroundColor="#4E342E"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Command="{Binding goToCheckoutCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
