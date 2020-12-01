@@ -41,6 +41,11 @@ namespace PizzaConfig
             totalPrice = calculateTotalPrice();
         }
 
+        private double calculateTotalPrice()
+        {
+            return selectedPizzas.Sum(pizza => pizza.price);
+        }
+
         async private void addToFavourite(Pizza pizza)
         {
             Pizza newPizza = NewPizza.createNewPizza(pizza);
@@ -57,11 +62,6 @@ namespace PizzaConfig
             displayAlert("Your order has been placed, please wait patiently for delivery!");
         }
 
-        async private void goToMainPage()
-        {
-            await Application.Current.MainPage.Navigation.PopAsync();
-        }
-
         async private void displayAlert(string message)
         {
             await Application
@@ -70,9 +70,9 @@ namespace PizzaConfig
                 .DisplayAlert("Info", message, "OK");
         }
 
-        private double calculateTotalPrice()
+        async private void goToMainPage()
         {
-            return selectedPizzas.Sum(pizza => pizza.price);
+            await Application.Current.MainPage.Navigation.PopAsync();
         }
     }
 }

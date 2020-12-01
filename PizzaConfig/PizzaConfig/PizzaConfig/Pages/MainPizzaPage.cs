@@ -6,11 +6,6 @@ namespace PizzaConfig
 {
     class MainPizzaPage : ViewModelBase
     {
-        private static string EXTRA_BACON = "Bacon";
-        private static string EXTRA_CHEESE = "Cheese";
-        private static string EXTRA_OLIVAS = "Olivas";
-        private static string SPACE = " • ";
-
         public Command selectPizzaCommand { get; set; }
         public Command addExtraBaconCommand { get; set; }
         public Command addExtraCheeseCommand { get; set; }
@@ -39,25 +34,30 @@ namespace PizzaConfig
         private void addExtraBacon(Pizza selectedPizza)
         {
             Pizza wantedPizza = basePizzas.Find((pizza) => pizza == selectedPizza);
-            wantedPizza.extras += SPACE + EXTRA_BACON;
+            wantedPizza.extras += Extras.SPACE + Extras.EXTRA_BACON;
         }
 
         private void addExtraCheese(Pizza selectedPizza)
         {
             Pizza wantedPizza = basePizzas.Find((pizza) => pizza == selectedPizza);
-            wantedPizza.extras += SPACE + EXTRA_CHEESE;
+            wantedPizza.extras += Extras.SPACE + Extras.EXTRA_CHEESE;
         }
 
         private void addExtraOlivas(Pizza selectedPizza)
         {
             Pizza wantedPizza = basePizzas.Find((pizza) => pizza == selectedPizza);
-            wantedPizza.extras += SPACE + EXTRA_OLIVAS;
+            wantedPizza.extras += Extras.SPACE + Extras.EXTRA_OLIVAS;
         }
 
         private void selectAndResetBasePizza(Pizza pizza)
         {
             Pizza newPizza = NewPizza.createNewPizza(pizza);
             selectedPizzas.Add(newPizza);
+            resetPizzaExtras(pizza);
+        }
+
+        private void resetPizzaExtras(Pizza pizza)
+        {
             pizza.extras = "";
         }
 

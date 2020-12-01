@@ -1,16 +1,23 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PizzaConfig
 {
     public class DatabaseService
     {
-        SQLiteAsyncConnection connection;
+        private static string DATABASE_NAME = "pizzaDatabase.db3";
+        private static string PATH = Path.Combine(Environment.GetFolderPath(
+            Environment.SpecialFolder.LocalApplicationData),
+            DATABASE_NAME);
 
-        public DatabaseService(string path)
+        private SQLiteAsyncConnection connection;
+
+        public DatabaseService()
         {
-            connection = new SQLiteAsyncConnection(path);
+            connection = new SQLiteAsyncConnection(PATH);
             connection.CreateTableAsync<Pizza>().Wait();
         }
 

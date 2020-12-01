@@ -21,20 +21,13 @@ namespace PizzaConfig
             removeFavouritePizzaCommand = new Command<Pizza>(pizza => removeFavouritePizza(pizza));
             addToBasketCommand = new Command<Pizza>(pizza => addToBasket(pizza));
 
-            getAllPizza();
+            getAllPizzas();
         }
 
-        private async void getAllPizza()
+        private async void getAllPizzas()
         {
             List<Pizza> pizzas = await App.databaseService.getAllPizzas();
             convertListToObsCollection(pizzas);
-        }
-
-        private void addToBasket(Pizza pizza)
-        {
-            Pizza newPizza = NewPizza.createNewPizza(pizza);
-            MainPizzaPage.selectedPizzas.Add(newPizza);
-            displayAlert("Selected pizza has been added to the basket");
         }
 
         private void convertListToObsCollection(List<Pizza> pizzas)
@@ -44,6 +37,13 @@ namespace PizzaConfig
                 MainPizzaPage.favouritesPizzas.Add(pizza);
             }
             favouritesPizzas = MainPizzaPage.favouritesPizzas;
+        }
+
+        private void addToBasket(Pizza pizza)
+        {
+            Pizza newPizza = NewPizza.createNewPizza(pizza);
+            MainPizzaPage.selectedPizzas.Add(newPizza);
+            displayAlert("Selected pizza has been added to the basket");
         }
 
         private async void removeFavouritePizza(Pizza pizza)

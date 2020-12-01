@@ -1,22 +1,17 @@
-﻿using System.IO;
-using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace PizzaConfig
 {
     public partial class App : Application
     {
         private static DatabaseService _databaseService;
-
         public static DatabaseService databaseService
         {
             get
             {
                 if (_databaseService == null)
                 {
-                    _databaseService = new DatabaseService(
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                        "XamarinSQLite.db3"));
+                    _databaseService = new DatabaseService();
                 }
                 return _databaseService;
             }
